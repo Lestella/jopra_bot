@@ -1,4 +1,5 @@
 import telebot
+import time
 from telebot import types
 import os
 
@@ -31,31 +32,31 @@ def welcome(message):
 
 
 @bot.message_handler(content_types=['text'])
-def lalala(message):
+def handle_text_message(message):
     # if message.chat.type == 'private':
     if message.text == '\U0001F913 Правила чата':
-        bot.send_message(message.chat.id, 'Правила можно почитать тут: https://telegra.ph/Pravila-chata-05-25-2')
+        send_and_delete(message=message, text='Правила можно почитать тут: https://telegra.ph/Pravila-chata-05-25-2')
+
     elif message.text == '\U0001F46F Подчаты':
         markup = types.InlineKeyboardMarkup(row_width=1)
-        item1 = types.InlineKeyboardButton("Куплю-продам", url="https://t.me/itwivestraderoom")
-        item2 = types.InlineKeyboardButton("Книжный клуб", url="https://t.me/kniginiTallina")
-        item3 = types.InlineKeyboardButton("Гуляем вместе с детьми", url="https://t.me/joinchat/De31pxTSW5xY35C5wAqgcQ")
-        item4 = types.InlineKeyboardButton("Шоппинг", url="https://t.me/shopping_itwives")
-        item5 = types.InlineKeyboardButton("Школы-садики", url="http://t.me/itwivesschool")
-        item6 = types.InlineKeyboardButton("Клуб любителей настольных игр", url="https://t.me/itwivesnastolki")
-        item7 = types.InlineKeyboardButton("Рукоделие", url="https://t.me/ITwiwesKnitting")
-        item8 = types.InlineKeyboardButton("QA-шная", url="https://t.me/qa_itwives")
-        item9 = types.InlineKeyboardButton("Кулинарный чат", url="http://t.me/extravaganzaoftaste")
-        item10 = types.InlineKeyboardButton("Гардеробная", url="https://t.me/itwives_wardrobe")
-        item11 = types.InlineKeyboardButton("Зимние забавы.", url="https://t.me/Katok_Tallinn")
-        item12 = types.InlineKeyboardButton("Активный отдых в Эстонии.",
-                                            url="https://t.me/joinchat/Auk2vUXBwbTCa1Oe66uYpw")
-        item13 = types.InlineKeyboardButton("Садоводы", url="https://t.me/ITwivesFlowers")
-
-        markup.add(item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13)
-
-        bot.send_message(message.chat.id, 'Это чаты нашего сообщества',
-                         reply_markup=markup)
+        markup.add(
+            types.InlineKeyboardButton("Куплю-продам", url="https://t.me/itwivestraderoom"),
+            types.InlineKeyboardButton("Книжный клуб", url="https://t.me/kniginiTallina"),
+            types.InlineKeyboardButton("Гуляем вместе с детьми", url="https://t.me/joinchat/De31pxTSW5xY35C5wAqgcQ"),
+            types.InlineKeyboardButton("Шоппинг", url="https://t.me/shopping_itwives"),
+            types.InlineKeyboardButton("Школы-садики", url="http://t.me/itwivesschool"),
+            types.InlineKeyboardButton("Клуб любителей настольных игр", url="https://t.me/itwivesnastolki"),
+            types.InlineKeyboardButton("Рукоделие", url="https://t.me/ITwiwesKnitting"),
+            types.InlineKeyboardButton("QA-шная", url="https://t.me/qa_itwives"),
+            types.InlineKeyboardButton("Кулинарный чат", url="http://t.me/extravaganzaoftaste"),
+            types.InlineKeyboardButton("Гардеробная", url="https://t.me/itwives_wardrobe"),
+            types.InlineKeyboardButton("Зимние забавы.", url="https://t.me/Katok_Tallinn"),
+            types.InlineKeyboardButton("Активный отдых в Эстонии.", url="https://t.me/joinchat/Auk2vUXBwbTCa1Oe66uYpw"),
+            types.InlineKeyboardButton("Садоводы", url="https://t.me/ITwivesFlowers"),
+            types.InlineKeyboardButton("Политика", url="https://t.me/politics_zopr"),
+            # types.InlineKeyboardButton("Политика", url="https://t.me/politics_zopr")
+        )
+        send_and_delete(message=message, text='Это чаты нашего сообщества', markup=markup)
 
     elif message.text == '\U00002764 Полезные каналы сообщества':
         markup = types.InlineKeyboardMarkup(row_width=1)
@@ -65,24 +66,14 @@ def lalala(message):
         item4 = types.InlineKeyboardButton("Доска мастеров", url="https://t.me/itwivesbusiness")
 
         markup.add(item1, item2, item3, item4)
-        bot.send_message(message.chat.id,
-                         'Tут сконцентрирована самая полезная информация',
-                         reply_markup=markup)
-    clear_first_message(message)
+        send_and_delete(message=message, text='Tут сконцентрирована самая полезная информация', markup=markup)
 
 
-def clear_first_message(message):
-    if message.text == "\U0001F913 Правила чата":
-        bot.delete_message(message.chat.id, message.message_id)
-    if message.text == "\U0001F46F Подчаты":
-        bot.delete_message(message.chat.id, message.message_id)
-    if message.text == "\U00002764 Полезные каналы сообщества":
-        bot.delete_message(message.chat.id, message.message_id)
-
-
-def clear_last_message(message):
-    if message.text == "Правила можно почитать тут: https://telegra.ph/Pravila-chata-05-25-2":
-        bot.delete_message(message.chat.id, message.inline_message_id)
+def send_and_delete(message, text, markup=None, autodelete=10, notification=True):
+    sent_message = bot.send_message(message.chat.id, text, reply_markup=markup, disable_notification=notification)
+    bot.delete_message(message.chat.id, message.message_id)
+    time.sleep(autodelete)
+    bot.delete_message(sent_message.chat.id, sent_message.message_id)
 
 
 bot.polling(none_stop=True)
