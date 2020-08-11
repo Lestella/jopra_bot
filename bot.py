@@ -3,6 +3,7 @@ from telebot import types
 import os
 
 bot_token = os.environ["BOT_TOKEN"]
+# bot_token = os.environ["BOT_TOKEN_TEST"]
 
 bot = telebot.TeleBot(bot_token)
 
@@ -60,8 +61,10 @@ def lalala(message):
         markup = types.InlineKeyboardMarkup(row_width=1)
         item1 = types.InlineKeyboardButton("Очень Важная Информация", url="https://t.me/info_eesti")
         item2 = types.InlineKeyboardButton("ITwives News. Дайджест за день", url="https://t.me/itwivesnews")
+        item3 = types.InlineKeyboardButton("Таблица рекомендаций", url="https://docs.google.com/spreadsheets/d/1mBFwjuJb49JHBwP48pZfHh-Bfh3xuNMzTGvgQU0duXA/edit?usp=drivesdk")
+        item4 = types.InlineKeyboardButton("Доска мастеров", url="https://t.me/itwivesbusiness")
 
-        markup.add(item1, item2)
+        markup.add(item1, item2, item3, item4)
         bot.send_message(message.chat.id,
                          'Tут сконцентрирована самая полезная информация',
                          reply_markup=markup)
