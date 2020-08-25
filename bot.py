@@ -4,7 +4,7 @@ from telebot import types
 import os
 
 bot_token = os.environ["BOT_TOKEN"]
-# bot_token = os.environ["BOT_TOKEN_TEST"]
+#bot_token = os.environ["BOT_TOKEN_TEST"]
 
 bot = telebot.TeleBot(bot_token)
 
@@ -53,23 +53,22 @@ def handle_text_message(message):
             types.InlineKeyboardButton("Зимние забавы.", url="https://t.me/Katok_Tallinn"),
             types.InlineKeyboardButton("Активный отдых в Эстонии.", url="https://t.me/joinchat/Auk2vUXBwbTCa1Oe66uYpw"),
             types.InlineKeyboardButton("Садоводы", url="https://t.me/ITwivesFlowers"),
-            types.InlineKeyboardButton("Политика", url="https://t.me/politics_zopr"),
-            # types.InlineKeyboardButton("Политика", url="https://t.me/politics_zopr")
+            types.InlineKeyboardButton("Политика", url="https://t.me/politics_zopr")
         )
         send_and_delete(message=message, text='Это чаты нашего сообщества', markup=markup)
 
     elif message.text == '\U00002764 Полезные каналы сообщества':
         markup = types.InlineKeyboardMarkup(row_width=1)
-        item1 = types.InlineKeyboardButton("Очень Важная Информация", url="https://t.me/info_eesti")
-        item2 = types.InlineKeyboardButton("ITwives News. Дайджест за день", url="https://t.me/itwivesnews")
-        item3 = types.InlineKeyboardButton("Таблица рекомендаций", url="https://docs.google.com/spreadsheets/d/1mBFwjuJb49JHBwP48pZfHh-Bfh3xuNMzTGvgQU0duXA/edit?usp=drivesdk")
-        item4 = types.InlineKeyboardButton("Доска мастеров", url="https://t.me/itwivesbusiness")
-
-        markup.add(item1, item2, item3, item4)
+        markup.add(
+            types.InlineKeyboardButton("Очень Важная Информация", url="https://t.me/info_eesti"),
+            types.InlineKeyboardButton("ITwives News. Дайджест за день", url="https://t.me/itwivesnews"),
+            types.InlineKeyboardButton("Таблица рекомендаций", url="https://docs.google.com/spreadsheets/d/1mBFwjuJb49JHBwP48pZfHh-Bfh3xuNMzTGvgQU0duXA/edit?usp=drivesdk"),
+            types.InlineKeyboardButton("Доска мастеров", url="https://t.me/itwivesbusiness")
+        )
         send_and_delete(message=message, text='Tут сконцентрирована самая полезная информация', markup=markup)
 
 
-def send_and_delete(message, text, markup=None, autodelete=10, notification=True):
+def send_and_delete(message, text, markup=None, autodelete=100, notification=True):
     sent_message = bot.send_message(message.chat.id, text, reply_markup=markup, disable_notification=notification)
     bot.delete_message(message.chat.id, message.message_id)
     time.sleep(autodelete)
