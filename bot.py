@@ -3,8 +3,9 @@ import time
 from telebot import types
 import os
 
+
 bot_token = os.environ["BOT_TOKEN"]
-#bot_token = os.environ["BOT_TOKEN_TEST"]
+# bot_token = os.environ["BOT_TOKEN_TEST"]
 
 bot = telebot.TeleBot(bot_token)
 
@@ -12,9 +13,10 @@ bot = telebot.TeleBot(bot_token)
 @bot.message_handler(content_types=['new_chat_members'])
 def greeting(message):
     bot.reply_to(message,
-                 text='Добро пожаловать, {0.first_name}!\nРасскажи нам о себе, пожалуйста, чтоб мы не считали тебя ботом и не удалили через 24 часа. \nА еще обязательно ознакомься с '
-                      'правилами чата и '
-                      'посмотри на полезные ссылки. Для этого напиши /start'.format(message.from_user, bot.get_me()),
+                 text='''Добро пожаловать, {0.first_name}!
+                 Расскажи нам о себе, пожалуйста, чтоб мы не считали тебя ботом и не удалили через 24 часа.
+                 А еще обязательно ознакомься с правилами чата и посмотри на полезные ссылки. 
+                 Для этого напиши /start и выбери интересующий раздел'''.format(message.from_user, bot.get_me()),
                  parse_mode='html')
 
 
@@ -53,7 +55,8 @@ def handle_text_message(message):
             types.InlineKeyboardButton("Зимние забавы.", url="https://t.me/Katok_Tallinn"),
             types.InlineKeyboardButton("Активный отдых в Эстонии.", url="https://t.me/joinchat/Auk2vUXBwbTCa1Oe66uYpw"),
             types.InlineKeyboardButton("Садоводы", url="https://t.me/ITwivesFlowers"),
-            types.InlineKeyboardButton("Политика", url="https://t.me/politics_zopr")
+            types.InlineKeyboardButton("Политика", url="https://t.me/politics_zopr"),
+            types.InlineKeyboardButton("Разговорный клуб английский язык ITWC", url="https://t.me/EngForITWC")
         )
         send_and_delete(message=message, text='Это чаты нашего сообщества', markup=markup)
 
@@ -63,7 +66,8 @@ def handle_text_message(message):
             types.InlineKeyboardButton("Очень Важная Информация", url="https://t.me/info_eesti"),
             types.InlineKeyboardButton("ITwives News. Дайджест за день", url="https://t.me/itwivesnews"),
             types.InlineKeyboardButton("Таблица рекомендаций", url="https://docs.google.com/spreadsheets/d/1mBFwjuJb49JHBwP48pZfHh-Bfh3xuNMzTGvgQU0duXA/edit?usp=drivesdk"),
-            types.InlineKeyboardButton("Доска мастеров", url="https://t.me/itwivesbusiness")
+            types.InlineKeyboardButton("Доска мастеров", url="https://t.me/itwivesbusiness"),
+            types.InlineKeyboardButton("Концерты в Таллине", url="https://t.me/concertivtalline")
         )
         send_and_delete(message=message, text='Tут сконцентрирована самая полезная информация', markup=markup)
 
