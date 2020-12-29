@@ -14,7 +14,9 @@ bot = telebot.TeleBot(bot_token)
 def greeting(message):
     bot.reply_to(message,
                  text="Добро пожаловать, {0.first_name}!"
-                      "\nРасскажи нам о себе, пожалуйста, чтоб мы не считали тебя ботом и не удалили через 24 часа."
+                      "\nПредставься и расскажи нам о себе, без этого мы просто удалим тебя в течении следуующих 10 минут"
+                      "\nДа, это обязательно."
+                      "\n"
                       "\nА еще обязательно ознакомься с правилами чата и посмотри на полезные ссылки."
                       "\nДля этого напиши /start и выбери интересующий раздел".format(message.from_user, bot.get_me()),
                  parse_mode='html')
@@ -55,7 +57,7 @@ def handle_text_message(message):
             types.InlineKeyboardButton("Зимние забавы.", url="https://t.me/Katok_Tallinn"),
             types.InlineKeyboardButton("Активный отдых в Эстонии.", url="https://t.me/joinchat/Auk2vUXBwbTCa1Oe66uYpw"),
             types.InlineKeyboardButton("Садоводы", url="https://t.me/ITwivesFlowers"),
-            types.InlineKeyboardButton("Политика", url="https://t.me/politics_zopr"),
+            types.InlineKeyboardButton("Политика", url="https://t.me/politicsitwives"),
             types.InlineKeyboardButton("Разговорный клуб английский язык ITWC", url="https://t.me/EngForITWC")
         )
         send_and_delete(message=message, text='Это чаты нашего сообщества', markup=markup)
