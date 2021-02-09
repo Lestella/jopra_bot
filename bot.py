@@ -66,7 +66,6 @@ def handle_text_message(message):
         markup = types.InlineKeyboardMarkup(row_width=1)
         markup.add(
             types.InlineKeyboardButton("Очень Важная Информация", url="https://t.me/info_eesti"),
-            #types.InlineKeyboardButton("ITwives News. Дайджест за день", url="https://t.me/itwivesnews"),
             types.InlineKeyboardButton("Таблица рекомендаций", url="https://docs.google.com/spreadsheets/d/1mBFwjuJb49JHBwP48pZfHh-Bfh3xuNMzTGvgQU0duXA/edit?usp=drivesdk"),
             types.InlineKeyboardButton("Доска мастеров", url="https://t.me/itwivesbusiness"),
             types.InlineKeyboardButton("Концерты в Таллине", url="https://t.me/concertivtalline")
