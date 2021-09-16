@@ -58,7 +58,9 @@ def handle_text_message(message):
             types.InlineKeyboardButton("Активный отдых в Эстонии.", url="https://t.me/joinchat/Auk2vUXBwbTCa1Oe66uYpw"),
             types.InlineKeyboardButton("Садоводы", url="https://t.me/ITwivesFlowers"),
             types.InlineKeyboardButton("Политика", url="https://t.me/politicsitwives"),
-            types.InlineKeyboardButton("Разговорный клуб английский язык ITWC", url="https://t.me/EngForITWC")
+            types.InlineKeyboardButton("Разговорный клуб английский язык ITWC", url="https://t.me/EngForITWC"),
+            types.InlineKeyboardButton("Питомцы", url="https://t.me/pets_tallinn"),
+            types.InlineKeyboardButton("Мамо-чат", url="https://t.me/joinchat/MBipeSizjMZjYzY0")
         )
         send_and_delete(message=message, text='Это чаты нашего сообщества', markup=markup)
 
